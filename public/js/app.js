@@ -52,7 +52,7 @@ function openModal(title, bodyHTML) {
 }
 
 function closeModal(event) {
-  if (!event || event.target === document.getElementById('modal-overlay') || event === undefined || typeof event !== 'object') {
+  if (!event || event.target === document.getElementById('modal-overlay')) {
     document.getElementById('modal-overlay').classList.add('hidden');
   }
 }

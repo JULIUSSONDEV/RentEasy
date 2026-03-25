@@ -3,6 +3,12 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET || 'renteasy-secret-key-change-in-production';
 const JWT_EXPIRES_IN = '7d';
 
+if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
+  throw new Error('JWT_SECRET environment variable must be set in production');
+} else if (!process.env.JWT_SECRET) {
+  console.warn('WARNING: JWT_SECRET is not set. Using default secret — do not use in production.');
+}
+
 function generateToken(user) {
   return jwt.sign(
     { id: user.id, email: user.email, role: user.role },

@@ -22,6 +22,15 @@ let propertyId, leaseId, paymentId, maintenanceId;
 const LANDLORD = { name: 'Alice Landlord', email: 'alice@test.com', password: 'password123', role: 'landlord', phone: '555-1001' };
 const TENANT   = { name: 'Bob Tenant',     email: 'bob@test.com',   password: 'password456', role: 'tenant',   phone: '555-2002' };
 
+// Clean database state before tests
+beforeAll(() => {
+  dbModule.exec('DELETE FROM maintenance_requests');
+  dbModule.exec('DELETE FROM payments');
+  dbModule.exec('DELETE FROM leases');
+  dbModule.exec('DELETE FROM properties');
+  dbModule.exec('DELETE FROM users');
+});
+
 describe('Auth API', () => {
   it('should register a landlord', async () => {
     const res = await request(app).post('/api/auth/register').send(LANDLORD);
@@ -307,7 +316,12 @@ afterAll(() => {
   dbModule.close();
   // Clean up test DB
   try {
-    const testDbPath = path.join(__dirname, '../data/renteasy.db');
+    const dbDir = path.join(__dirname, '../data');
+    const testDbPath = path.join(dbDir, 'renteasy.db');
     if (fs.existsSync(testDbPath)) fs.unlinkSync(testDbPath);
+    // Also remove WAL/SHM files if present
+    [testDbPath + '-wal', testDbPath + '-shm'].forEach(f => {
+      if (fs.existsSync(f)) fs.unlinkSync(f);
+    });
   } catch {}
 });
