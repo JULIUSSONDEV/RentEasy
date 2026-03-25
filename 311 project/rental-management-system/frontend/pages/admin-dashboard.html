@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - RentEasy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="dash-layout">
+
+<aside class="sidebar" id="sidebar">
+    <a href="../index.html" class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+            <svg width="18" height="18" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+        </div>
+        <div>
+            <div class="sidebar-logo-name">RentEasy</div>
+            <div class="sidebar-logo-tagline">Admin Panel</div>
+        </div>
+    </a>
+    <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Overview</div>
+        <a href="#" class="sidebar-link active" data-section="dashboard">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            Dashboard
+        </a>
+        <div class="sidebar-section-label">Management</div>
+        <a href="#" class="sidebar-link" data-section="users">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+            Users
+        </a>
+        <a href="#" class="sidebar-link" data-section="properties">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Properties
+        </a>
+        <a href="#" class="sidebar-link" data-section="payments">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
+            Payments
+        </a>
+        <a href="#" class="sidebar-link" data-section="disputes">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            Disputes
+            <span class="link-badge hidden" id="disputeBadge">0</span>
+        </a>
+        <a href="#" class="sidebar-link" data-section="reports">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            Reports
+        </a>
+        <div class="sidebar-section-label">Account</div>
+        <a href="#" class="sidebar-link" data-section="profile">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+            My Profile
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-user">
+            <div class="sidebar-user-avatar" id="sidebarAvatar">A</div>
+            <div class="sidebar-user-info">
+                <div class="sidebar-user-name" id="sidebarName">Admin</div>
+                <div class="sidebar-user-role">Administrator</div>
+            </div>
+        </div>
+        <button class="btn btn-ghost btn-sm btn-full" id="logoutBtn" style="color:var(--gray-400);justify-content:flex-start;gap:0.5rem;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Sign Out
+        </button>
+    </div>
+</aside>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="dash-main">
+    <header class="dash-topbar">
+        <div class="dash-topbar-left">
+            <button class="sidebar-toggle-btn" id="sidebarToggle">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <span class="dash-page-title" id="pageTitle">Admin Dashboard</span>
+        </div>
+        <div class="dash-topbar-right">
+            <button class="notif-btn" id="notifBtn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
+                </svg>
+                <span class="notif-count hidden" id="notifCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="dash-content">
+
+
+<div id="section-dashboard" class="dash-section">
+            <div class="stat-cards" id="adminStats">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-green">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Properties</div>
+                        <div class="stat-value" id="statProperties">-</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-blue">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Tenants</div>
+                        <div class="stat-value" id="statTenants">-</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-purple">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Landlords</div>
+                        <div class="stat-value" id="statLandlords">-</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-yellow">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Total Revenue</div>
+                        <div class="stat-value" id="statRevenue">-</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:#dcfce7;color:#16a34a;">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Cities</div>
+                        <div class="stat-value" id="statCities">-</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-red">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Total Bookings</div>
+                        <div class="stat-value" id="statBookings">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                
+                <div class="card">
+                    <div class="card-header"><h3>Recent Bookings</h3></div>
+                    <div id="recentBookingsAdmin">
+                        <div class="flex-center" style="padding:2rem;"><div class="spinner"></div></div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header flex-between">
+                        <h3>Monthly Revenue</h3>
+                        <span class="badge badge-success text-xs" id="revenueYear">2025</span>
+                    </div>
+                    <div class="card-body" id="revenueChart">
+                        <div class="flex-center" style="padding:2rem;"><div class="spinner"></div></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section-header" style="margin-top:1.5rem;">
+                <h3>People Overview</h3>
+                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                    <input type="text" id="dashboardPeopleSearch" class="form-control" placeholder="Search landlords or tenants..." style="width:260px;">
+                    <select id="dashboardPeopleSort" class="form-control" style="width:auto;">
+                        <option value="name_asc">Sort: Name (A-Z)</option>
+                        <option value="newest">Sort: Newest First</option>
+                        <option value="properties_desc">Sort: Most Properties (Landlords)</option>
+                    </select>
+                </div>
+            </div>
+
+<div class="grid-2" style="margin-top:0.5rem;">
+                <div class="card">
+                    <div class="card-header flex-between">
+                        <h3>Landlords</h3>
+                        <span class="badge badge-primary" id="landlordCount">-</span>
+                    </div>
+                    <div id="landlordsList" style="max-height:220px;overflow-y:auto;">
+                        <div class="flex-center" style="padding:1.5rem;"><div class="spinner"></div></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header flex-between">
+                        <h3>Tenants</h3>
+                        <span class="badge badge-gray" id="tenantCount">-</span>
+                    </div>
+                    <div id="tenantsList" style="max-height:220px;overflow-y:auto;">
+                        <div class="flex-center" style="padding:1.5rem;"><div class="spinner"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top:1.5rem;">
+                <div class="card">
+                    <div class="card-header flex-between">
+                        <h3>Cities</h3>
+                        <span class="badge badge-success" id="cityCount">-</span>
+                    </div>
+                    <div id="citiesList" style="max-height:220px;overflow-y:auto;">
+                        <div class="flex-center" style="padding:1.5rem;"><div class="spinner"></div></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header flex-between">
+                        <h3>Properties</h3>
+                        <span class="badge badge-info" id="propertiesSummaryCount">-</span>
+                    </div>
+                    <div id="propertiesSummaryList" style="max-height:220px;overflow-y:auto;">
+                        <div class="flex-center" style="padding:1.5rem;"><div class="spinner"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div id="section-users" class="dash-section hidden">
+            <div class="section-header">
+                <h3>User Management</h3>
+                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                    <button type="button" class="btn btn-ghost btn-sm" id="exportUsersCsvBtn">Export Users CSV</button>
+                    <input type="text" id="userSearch" class="form-control" placeholder="Search users..." style="width:200px;">
+                    <select id="userRoleFilter" class="form-control" style="width:auto;">
+                        <option value="">All Roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="landlord">Landlord</option>
+                        <option value="tenant">Tenant</option>
+                    </select>
+                </div>
+            </div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">
+                <span class="badge badge-info">Admins: <span id="usersCountAdmin">0</span></span>
+                <span class="badge badge-primary">Landlords: <span id="usersCountLandlord">0</span></span>
+                <span class="badge badge-gray">Tenants: <span id="usersCountTenant">0</span></span>
+                <span class="badge badge-success">Active: <span id="usersCountActive">0</span></span>
+                <span class="badge badge-danger">Inactive: <span id="usersCountInactive">0</span></span>
+            </div>
+            <div class="card">
+                <div id="usersTable">
+                    <div class="flex-center" style="padding:2rem;"><div class="spinner"></div></div>
+                </div>
+            </div>
+            <div id="usersPagination" class="pagination"></div>
+        </div>
+
+
+<div id="section-properties" class="dash-section hidden">
+            <div class="section-header"><h3>All Properties</h3></div>
+            <div class="card">
+                <div id="propertiesTable">
+                    <div class="flex-center" style="padding:2rem;"><div class="spinner"></div></div>
+                </div>
+            </div>
+        </div>
+
+
+<div id="section-payments" class="dash-section hidden">
+            <div class="section-header">
+                <h3>Payment Management</h3>
+                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                    <button type="button" class="btn btn-ghost btn-sm" id="exportPaymentsCsvBtn">Export Payments CSV</button>
+                    <input type="date" id="paymentFromDate" class="form-control" style="width:auto;" title="From date">
+                    <input type="date" id="paymentToDate" class="form-control" style="width:auto;" title="To date">
+                    <select id="paymentStatusFilter" class="form-control" style="width:auto;">
+                        <option value="">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="verified">Verified</option>
+                        <option value="failed">Failed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card">
+                <div id="paymentsTable">
+                    <div class="flex-center" style="padding:2rem;"><div class="spinner"></div></div>
+                </div>
+            </div>
+            <div id="paymentsPagination" class="pagination"></div>
+        </div>
+
+
+<div id="section-disputes" class="dash-section hidden">
+            <div class="section-header"><h3>Dispute Management</h3></div>
+            <div class="card">
+                <div id="disputesTable">
+                    <div class="flex-center" style="padding:2rem;"><div class="spinner"></div></div>
+                </div>
+            </div>
+        </div>
+
+
+<div id="section-reports" class="dash-section hidden">
+            <div class="section-header">
+                <h3>Reports</h3>
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <label class="form-label" style="margin:0;">Year:</label>
+                    <select id="reportYear" class="form-control" style="width:auto;">
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                    </select>
+                    <button class="btn btn-primary btn-sm" id="loadReportBtn">Generate</button>
+                </div>
+            </div>
+            <div id="reportsContent">
+                <div class="grid-2 mb-6">
+                    <div class="card">
+                        <div class="card-header"><h3>Monthly Income</h3></div>
+                        <div class="card-body" id="monthlyIncomeReport"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3>Booking Status Breakdown</h3></div>
+                        <div class="card-body" id="bookingStatsReport"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Top Properties by Revenue</h3></div>
+                    <div id="topPropertiesReport">
+                        <div class="flex-center" style="padding:2rem;"><div class="spinner"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div id="section-profile" class="dash-section hidden">
+            <div class="profile-header" id="profileHeader">
+                <div class="profile-avatar" id="profileAvatar">A</div>
+                <div class="profile-info">
+                    <h2 id="profileName">System Admin</h2>
+                    <p style="color:rgba(255,255,255,0.8);" id="profileEmail"></p>
+                    <span class="badge profile-role-badge mt-2">Administrator</span>
+                </div>
+            </div>
+            <div class="card" style="max-width:480px;">
+                <div class="card-header"><h3 class="text-base">Change Password</h3></div>
+                <div class="card-body">
+                    <form id="passwordForm">
+                        <div class="form-group mb-4">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" id="currentPwd" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label">New Password</label>
+                            <input type="password" id="newPwd" class="form-control">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label">Confirm New Password</label>
+                            <input type="password" id="confirmPwd" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Update Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+</div>
+
+
+<div class="modal-backdrop" id="resolveDisputeModal">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title">Resolve Dispute</span>
+            <button class="modal-close" onclick="closeModal('resolveDisputeModal')">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="resolveDisputeId">
+            <p id="resolveDisputeSubject" class="text-sm font-semibold" style="margin-bottom:1rem;color:var(--gray-700);"></p>
+            <div class="form-group mb-4">
+                <label class="form-label">Update Status</label>
+                <select id="disputeStatus" class="form-control">
+                    <option value="investigating">Investigating</option>
+                    <option value="resolved">Resolved</option>
+                    <option value="dismissed">Dismissed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Resolution Notes</label>
+                <textarea id="disputeNotes" class="form-control" rows="4"
+                    placeholder="Explain how the dispute was handled..."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-ghost" onclick="closeModal('resolveDisputeModal')">Cancel</button>
+            <button type="button" class="btn btn-primary" id="confirmResolveBtn">Update Dispute</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop" id="bookingDetailsModal">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title">Booking Details</span>
+            <button class="modal-close" onclick="closeModal('bookingDetailsModal')">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body" id="bookingDetailsContent">
+            <div class="flex-center" style="padding:2rem;"><div class="spinner"></div></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-ghost" onclick="closeModal('bookingDetailsModal')">Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="copyright-bar">&copy; 2025 House Rental Management. All rights reserved.</div>
+
+<div id="toast-container"></div>
+<script src="../js/api.js"></script>
+<script src="../js/dashboard.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

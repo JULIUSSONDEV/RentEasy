@@ -1,0 +1,14 @@
+Server running on port 5000 [development]
+[DB] SQLite database loaded: C:\Users\PC\OneDrive\Desktop\311 project\rental-management-system\database\renteasy.db
+[DB] SQLite ready.
+[0mGET /api/health [32m200[0m 12.954 ms - 74[0m
+[0mPOST /api/auth/login [33m401[0m 18.561 ms - 38[0m
+[0mGET /api/properties?is_available=1&page=1&limit=9 [36m304[0m 15.741 ms - -[0m
+[0mGET /uploads/properties/properties-1772695545331-378828076.jpg [36m304[0m 4.946 ms - -[0m
+[0mGET /api/properties?is_available=1&page=1&limit=9 [36m304[0m 3.693 ms - -[0m
+[0mGET /uploads/properties/properties-1772695545331-378828076.jpg [36m304[0m 2.352 ms - -[0m
+[0mGET /api/stats [36m304[0m 4.415 ms - -[0m
+[0mGET /api/properties?limit=6 [36m304[0m 5.297 ms - -[0m
+[0mGET /uploads/properties/properties-1772695545331-378828076.jpg [36m304[0m 1.318 ms - -[0m
+[0mGET /api/properties?is_available=1&page=1&limit=9 [36m304[0m 3.280 ms - -[0m
+[0mGET /uploads/properties/properties-1772695545331-378828076.jpg [36m304[0m 2.516 ms - -[0m

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties - RentEasy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="../index.html" class="navbar-brand">
+            <div class="brand-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </div>
+            <span class="brand-name">RentEasy</span>
+        </a>
+        <nav class="navbar-nav">
+            <a href="../index.html"   class="nav-link">Home</a>
+            <a href="properties.html" class="nav-link active">Properties</a>
+        </nav>
+        <div class="navbar-actions" id="navActions">
+            <a href="login.html"    class="btn btn-ghost btn-sm">Sign In</a>
+            <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+    </div>
+</nav>
+
+
+<div style="background:var(--primary);padding:0.5rem 1.5rem;color:white;">
+    <div class="container">
+        <h2 style="color:white;margin:0;">Browse Properties</h2>
+        <p style="color:rgba(255,255,255,0.8);margin-top:0.375rem;" id="resultCount">Loading properties...</p>
+    </div>
+</div>
+
+
+<div class="search-section">
+    <div class="container">
+        <form id="filterForm">
+            <div style="display:grid;grid-template-columns:2fr repeat(5,1fr) auto auto;gap:0.75rem;align-items:end;flex-wrap:wrap;">
+                <div>
+                    <div class="search-label">Search</div>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                        </span>
+                        <input type="text" name="search" id="searchInput" class="form-control" placeholder="Search by title, location...">
+                    </div>
+                </div>
+                <div>
+                    <div class="search-label">City</div>
+                    <input type="text" name="city" id="cityInput" class="form-control" placeholder="Nairobi...">
+                </div>
+                <div>
+                    <div class="search-label">Type</div>
+                    <select name="type" id="typeSelect" class="form-control">
+                        <option value="">All Types</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="house">House</option>
+                        <option value="studio">Studio</option>
+                        <option value="office">Office</option>
+                        <option value="land">Land</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="search-label">Bedrooms</div>
+                    <select name="bedrooms" id="bedroomsSelect" class="form-control">
+                        <option value="">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="search-label">Min Rent</div>
+                    <input type="number" name="min_rent" id="minRent" class="form-control" placeholder="0">
+                </div>
+                <div>
+                    <div class="search-label">Max Rent</div>
+                    <input type="number" name="max_rent" id="maxRent" class="form-control" placeholder="Any">
+                </div>
+                <div>
+                    <div class="search-label">&nbsp;</div>
+                    <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;cursor:pointer;white-space:nowrap;">
+                        <input type="checkbox" id="availableOnly" name="available_only" checked style="width:15px;height:15px;accent-color:var(--primary);cursor:pointer;">
+                        Available Only
+                    </label>
+                </div>
+                <div>
+                    <div class="search-label">&nbsp;</div>
+                    <div style="display:flex;gap:0.5rem;">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <button type="button" id="clearBtn" class="btn btn-ghost">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<main class="section-sm">
+    <div class="container">
+        <div id="propertiesContainer">
+            <div class="flex-center" style="padding:4rem;">
+                <div class="spinner" style="width:2.5rem;height:2.5rem;border-width:3px;"></div>
+            </div>
+        </div>
+        
+        <div id="paginationContainer" class="pagination"></div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2025 House Rental Management. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<div id="toast-container"></div>
+<script src="../js/api.js"></script>
+<script src="../js/properties.js"></script>
+</body>
+</html>

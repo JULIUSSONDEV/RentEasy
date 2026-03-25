@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="payHero">
+        <script src="https://applet.payherokenya.com/cdn/button_sdk.js?v=3.1"></script>
+    </div>
+
+    <script>
+        PayHero.init({
+            paymentUrl: "https://app.payhero.co.ke/lipwa/5105", // Replace with your Lipwa link
+            width: "100%",
+            height: "100%",
+            containerId: "payHero",
+            channelID: 100, // Your payment channel ID
+            amount: 1, // Payment amount
+            phone: "0712345678", // (Optional) Customer phone
+            name: "Good Samaritan", // (Optional) Customer name
+            reference: "buttonTesting", // (Optional) Payment reference
+            buttonName: "Pay Now KES 1", // Button text
+            buttonColor: "#00a884", // Button color
+            successUrl: null, // (Optional) Redirect URL after success
+            failedUrl: null, // (Optional) Redirect URL after failure
+            callbackUrl: null // (Optional) Webhook URL to receive payment payload
+        });
+
+        // Handling payment success or failure
+        window.addEventListener('message', function(event) {
+            if (event.data.paymentSuccess) {
+                console.log("Payment Successful:", event.data);
+                alert('Payment successful!');
+            } else {
+                alert('Oopsie! Payment failed');
+            }
+        });
+    </script>
+
+</body>
+</html>
