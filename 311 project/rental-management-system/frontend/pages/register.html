@@ -242,7 +242,11 @@
             else if (role === 'landlord') window.location.href = 'landlord-dashboard.html';
             else window.location.href = 'tenant-dashboard.html';
         } catch (err) {
-            alertBox.innerHTML = `<div class="alert alert-danger">${err.message}</div>`;
+            const isNetworkError = err instanceof TypeError || err.message === 'Failed to fetch';
+            const msg = isNetworkError
+                ? 'Cannot connect to server. Make sure the backend is running on port 5000.'
+                : err.message;
+            alertBox.innerHTML = `<div class="alert alert-danger">${msg}</div>`;
             btn.disabled = false;
             btn.innerHTML = 'Create Account';
         }
