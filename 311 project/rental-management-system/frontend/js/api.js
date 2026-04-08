@@ -55,7 +55,15 @@ const API = {
 
                 return data;
             } catch (err) {
-                const isNetworkError = err instanceof TypeError && err.message === 'Failed to fetch';
+                // Detect network errors across browsers:
+                // Chrome:  "Failed to fetch"
+                // Firefox: "NetworkError when attempting to fetch resource."
+                // Safari:  "Load failed"
+                const isNetworkError = err instanceof TypeError && (
+                    err.message === 'Failed to fetch' ||
+                    err.message.startsWith('NetworkError') ||
+                    err.message === 'Load failed'
+                );
                 if (!isNetworkError) throw err;
                 lastNetworkError = err;
             }
